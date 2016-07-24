@@ -1,2 +1,3 @@
-# product-listing
-LMD - CSS Course // Product Listing Page 
+###Learn Modern Developer - CSS Course
+
+Product listing page and shopping cart
