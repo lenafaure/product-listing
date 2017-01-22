@@ -32,7 +32,7 @@
             </li>
         </ul>
         <ul id="cart-login-wrapper"  class="align-center uppercase">
-            <li class="left cart-icon-items">
+            <li id="cart-header-button" class="left cart-icon-items">
                 <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="cart-number-items">3</span>
             </li>
             <li class="cart-icon-items">
@@ -41,6 +41,99 @@
         </ul>
     </header>
 
+    <div id="cart">
+        <div id="inter-img-wrapper">
+            <div id="inter-img">
+                <div class="container">
+                    <h1 id="inter-title" class="uppercase">Thank you for shopping with us</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2 class="uppercase">Your shopping cart</h2>
+                <div id="hide-shopping-cart" class="btn btn-pink align-center">Hide Shopping Cart</div>
+            </div>
+
+            <div class="cart-row-wrapper">
+                <div class="cart-row">
+
+                    <div class="cart-items-wrapper"></div>
+
+                    <div class="info-purchase">
+                        <span>Do you have a promo code ?</span>
+                        <input type="text" placeholder="Insert your code here" class="promo-input">
+                        <span class="btn btn-pink">GO</span>
+                    </div>
+
+                    <div class="keep-shopping">
+
+                        <div class="keep-shopping-title">
+                            <div class="section-title uppercase">
+                                <h2>Have you thought of everything ?</h2>
+                            </div>
+                            <div><span class="btn btn-pink uppercase">Keep shopping</span></div>
+                        </div>
+
+                        <div class="keep-shopping-images">
+                            <a href="#" class="img-wrapper">
+                                <img src="img/bra.jpg">
+                                <span class="product-name uppercase">Heidelberg</span>
+                                <span>49.00 €</span>
+                            </a>
+                            <a href="#" class="img-wrapper">
+                                <img src="img/shoes.jpg">
+                                <span class="product-name uppercase">Manchester</span>
+                                <span>109.00 €</span>
+                            </a>
+                            <a href="#" class="img-wrapper">
+                                <img src="img/shirt.jpg">
+                                <span class="product-name uppercase">Lancaster</span>
+                                <span>39.00 €</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="cart-wrap-up">
+                    <h3 class="uppercase align-center">Summary</h3>
+                    <table>
+                        <tr>
+                            <td>
+                                <span class="align-right table-space-right">Total purchases: </span>
+                            </td>
+                            <td class="align-right">
+                                <span>227.00 €</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="align-right table-space-right">Shipping fee*: </span>
+                            </td>
+                            <td class="align-right">
+                                <span class="line-through">12.00 €</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="grand-total-text uppercase align-right table-space-right">Total: </p>
+                            </td>
+                            <td class="align-right">
+                                <span class="grand-total-integer">227.00 €</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="btn btn-pink align-center uppercase">Check out</div>
+                    <div class="italic small">
+                        <p>*free shipping for orders of 50€ or more</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div id="intro-img-wrapper">
         <div id="main-img">
             <div class="container">
@@ -48,6 +141,7 @@
             </div>
         </div>
     </div>
+
 
 
     <div id="products" class="container">
@@ -64,7 +158,7 @@
                 <span class="product-name uppercase">Riga</span>
                 <p class="product-description">Ultimate dress</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 129</p>
+                    <p class="align-center product-price"><span>€</span> <span>129</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -76,7 +170,7 @@
                 <span class="product-name uppercase">Venice</span>
                 <p class="product-description">Fantastic skirt</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 59</p>
+                    <p class="align-center product-price"><span>€</span> <span>59</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -88,7 +182,7 @@
                 <span class="product-name uppercase">Lancaster</span>
                 <p class="product-description">Amazing shirt</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 39</p>
+                    <p class="align-center product-price"><span>€</span> <span>39</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -104,7 +198,7 @@
                 <span class="product-name uppercase">Cagliari</span>
                 <p class="product-description">Awesome pants</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 59</p>
+                    <p class="align-center product-price"><span>€</span> <span>59</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -116,7 +210,7 @@
                 <span class="product-name uppercase">Manchester</span>
                 <p class="product-description">Everyday shoes</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 109</p>
+                    <p class="align-center product-price"><span>€</span> <span>109</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -128,7 +222,7 @@
                 <span class="product-name uppercase">Munich</span>
                 <p class="product-description">Indispensable jeans</p>
                 <div class="buying-actions">
-                    <p class="align-center product-price">€ 79</p>
+                    <p class="align-center product-price"><span>€</span> <span>79</span></p>
                     <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
                 </div>
             </a>
@@ -143,7 +237,7 @@
             <span class="product-name uppercase">Heidelberg</span>
             <p class="product-description">Sweet bra</p>
             <div class="buying-actions">
-                <p class="align-center product-price">€ 49</p>
+                <p class="align-center product-price"><span>€</span> <span>49</span></p>
                 <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
             </div>
         </a>
@@ -155,7 +249,7 @@
             <span class="product-name uppercase">Strasbourg</span>
             <p class="product-description">Wedding dress</p>
             <div class="buying-actions">
-                <p class="align-center product-price">€ 89</p>
+                <p class="align-center product-price"><span>€</span> <span>89</span></p>
                 <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
             </div>
         </a>
@@ -167,7 +261,7 @@
             <span class="product-name uppercase">Rome</span>
             <p class="product-description">Casual sneakers</p>
             <div class="buying-actions">
-                <p class="align-center product-price">€ 39</p>
+                <p class="align-center product-price"><span>€</span> <span>39</span></p>
                 <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
             </div>
         </a>
@@ -183,7 +277,7 @@
             <span class="product-name uppercase">Liverpool</span>
             <p class="product-description">One sweatshirt</p>
             <div class="buying-actions">
-                <p class="align-center product-price">€ 99</p>
+                <p class="align-center product-price"><span>€</span> <span>99</span></p>
                 <div class="btn add-to-cart"><p class="align-center">Add to cart</p></div>
             </div>
         </a>
@@ -195,156 +289,7 @@
 
 
 
-    <div id="inter-img-wrapper">
-        <div id="inter-img">
-            <div class="container">
-                <h1 id="inter-title" class="uppercase">Thank you for shopping with us</h1>
-            </div>
-        </div>
-    </div>
-
-    <div id="cart" class="container">
-
-        <div class="section-title uppercase"><i class="fa fa-"></i> <h2>Your shopping cart</h2></div>
-
-        <div class="cart-row-wrapper">
-            <div class="cart-row">
-
-                <div class="cart-item">
-                    <div class="img-wrapper">
-                        <img src="img/dress.jpg">
-                    </div>
-                    <div class="desc-wrapper">
-                        <span class="product-name uppercase">Riga</span>
-                        <p class="product-description">Ultimate dress</p>
-                        <p class="size-description">Size: M</p>
-                    </div>
-                    <div class="quantity-wrapper">
-                        <span>Qty.</span>
-                        <input size="2" type="text" value="1">
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="" class="delete-item">Remove</a>
-                    </div>
-                    <div class="price-wrapper">
-                        <span>129.00 €</span>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <div class="img-wrapper">
-                        <img src="img/skirt.jpg">
-                    </div>
-                    <div class="desc-wrapper">
-                        <span class="product-name uppercase">Venice</span>
-                        <p class="product-description">Fantastic skirt</p>
-                        <p class="size-description">Size: M</p>
-                    </div>
-                    <div class="quantity-wrapper">
-                        <span>Qty.</span>
-                        <input size="2" type="text" value="1">
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="" class="delete-item">Remove</a>
-                    </div>
-                    <div class="price-wrapper">
-                        <span>59.00 €</span>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <div class="img-wrapper">
-                        <img src="img/sneakers.jpg">
-                    </div>
-                    <div class="desc-wrapper">
-                        <span class="product-name uppercase">Rome</span>
-                        <p class="product-description">Casual sneakers</p>
-                        <p class="size-description">Size: M</p>
-                    </div>
-                    <div class="quantity-wrapper">
-                        <span>Qty.</span>
-                        <input size="2" type="text" value="1">
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="#" class="plus-minus-signs"><i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i></a>
-                        <a href="" class="delete-item">Remove</a>
-                    </div>
-                    <div class="price-wrapper">
-                        <span>39.00 €</span>
-                    </div>
-                </div>
-
-                <div class="info-purchase">
-                    <span>Do you have a promo code ?</span>
-                    <input type="text" placeholder="Insert your code here" class="promo-input">
-                    <span class="btn btn-pink">GO</span>
-                </div>
-
-                <div class="keep-shopping">
-
-                    <div class="keep-shopping-title">
-                        <div class="section-title uppercase">
-                            <h2>Have you thought of everything ?</h2>
-                        </div>
-                        <div><span class="btn btn-pink uppercase">Keep shopping</span></div>
-                    </div>
-
-                    <div class="keep-shopping-images">
-                        <a href="#" class="img-wrapper">
-                            <img src="img/bra.jpg">
-                            <span class="product-name uppercase">Heidelberg</span>
-                            <span>49.00 €</span>
-                        </a>
-                        <a href="#" class="img-wrapper">
-                            <img src="img/shoes.jpg">
-                            <span class="product-name uppercase">Manchester</span>
-                            <span>109.00 €</span>
-                        </a>
-                        <a href="#" class="img-wrapper">
-                            <img src="img/shirt.jpg">
-                            <span class="product-name uppercase">Lancaster</span>
-                            <span>39.00 €</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="cart-wrap-up">
-                <h3 class="uppercase align-center">Summary</h3>
-                <table>
-                    <tr>
-                        <td>
-                            <span class="align-right table-space-right">Total purchases: </span>
-                        </td>
-                        <td class="align-right">
-                            <span>227.00 €</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="align-right table-space-right">Shipping fee*: </span>
-                        </td>
-                        <td class="align-right">
-                            <span class="line-through">12.00 €</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p class="grand-total-text uppercase align-right table-space-right">Total: </p>
-                        </td>
-                        <td class="align-right">
-                            <span class="grand-total-integer">227.00 €</span>
-                        </td>
-                    </tr>
-                </table>
-                <div class="btn btn-pink align-center uppercase">Check out</div>
-                <div class="italic small">
-                    <p>*free shipping for orders of 50€ or more</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
+<script src="js/main.js"></script>
 
 </body>
 

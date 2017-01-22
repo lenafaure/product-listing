@@ -13,6 +13,10 @@ body {
     background-color: #fff;
 }
 
+#cart {
+    display: none;
+}
+
 .cart-icon-items {
     color: #fe2d61;
     display: flex;
@@ -185,6 +189,13 @@ header {
     padding: 2em 0;
     font-weight: 500;
     font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#hide-shopping-cart {
+    padding: 10px;
 }
 
 .product-name {
