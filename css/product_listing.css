@@ -17,6 +17,12 @@ body {
     display: none;
 }
 
+#empty-cart {
+    display: none;
+    padding-bottom: 25px;
+    color: #fe2d61;
+}
+
 .cart-icon-items {
     color: #fe2d61;
     display: flex;
@@ -196,6 +202,8 @@ header {
 
 #hide-shopping-cart {
     padding: 10px;
+    font-weight: 300 !important;
+    font-size: 15px;
 }
 
 .product-name {

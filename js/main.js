@@ -6,8 +6,12 @@ window.onload = function() {
     var hideShoppingCart = document.getElementById("hide-shopping-cart");
     var headerCartButton = document.getElementById("cart-header-button");
     var cartItemsWrapper = document.querySelector(".cart-items-wrapper");
+    var emptyCartMsg = document.getElementById("empty-cart");
 
-    // Show shopping cart
+    var plusButton = document.querySelectorAll(".plusButton");
+
+
+    // Add item on click on "Add to Cart" button
     for (var i = 0; i < addToCart.length; i++){
         addToCart[i].addEventListener("click", function(e){
             e.preventDefault();
@@ -15,6 +19,35 @@ window.onload = function() {
             shoppingCart.style.display = "block";
         });
     }
+
+    // Remove item on click on "Remove" button
+    document.addEventListener("click", function() {
+        // Is this a good practice ? I have a feeling that the answer is no..;
+        var deleteItems = document.querySelectorAll(".delete-item");
+        var minusButton = document.querySelectorAll(".minusButton");
+
+        if(deleteItems.length == 0) {
+            emptyCartMsg.style.display = "block";
+        }
+        for (var i = 0; i < deleteItems.length; i++){
+            deleteItems[i].addEventListener("click", function(e){
+                e.preventDefault();
+                removeItem(this);
+            });
+        }
+
+        //Change quantity of item Toggle shopping cart
+        for (var i = 0; i < minusButton.length; i++) {
+            minusButton[i].addEventListener("click", function () {
+                var inputQty = this.parentElement.children[1].value;
+
+                this.parentElement.children[1].setAttribute("value", inputQty--);
+
+
+
+            });
+        }
+    });
 
     // Hide shopping cart
     hideShoppingCart.addEventListener("click", function(){
@@ -30,7 +63,9 @@ window.onload = function() {
         }
     });
 
-    // Add items to shopping cart
+
+
+    // Function for adding items
     function addItem(item) {
         var itemPrice = item.parentElement.children[0].children[1].innerHTML;
         var itemImage = item.parentElement.parentElement.children[0].children[0].attributes[0].textContent;
@@ -74,20 +109,21 @@ window.onload = function() {
 
         var a_node_plus_sign = document.createElement("a");
         a_node_plus_sign.setAttribute("href", "#");
-        a_node_plus_sign.className = "plus-minus-signs";
+        a_node_plus_sign.className = "plus-minus-signs plusButton";
 
         var i_node_plus_icon = document.createElement("i");
         i_node_plus_icon.className = "fa fa-plus-circle fa-lg";
 
         var a_node_minus_sign = document.createElement("a");
-        a_node_minus_sign .setAttribute("href", "#");
-        a_node_minus_sign .className = "plus-minus-signs";
+        a_node_minus_sign.setAttribute("href", "#");
+        a_node_minus_sign.className = "plus-minus-signs minusButton";
 
         var i_node_minus_icon = document.createElement("i");
         i_node_minus_icon.className = "fa fa-minus-circle fa-lg";
 
         var a_node_delete_item = document.createElement("a");
         a_node_delete_item.className = "delete-item";
+        a_node_delete_item.setAttribute("href", "#");
         a_node_delete_item.innerHTML = "Remove";
 
         var div_node_price_wrapper = document.createElement("div");
@@ -104,8 +140,8 @@ window.onload = function() {
         div_node_qty_wrapper.append(p_input_node_qty);
         a_node_plus_sign.append(i_node_plus_icon);
         a_node_minus_sign.append(i_node_minus_icon);
-        div_node_qty_wrapper.append(a_node_plus_sign);
         div_node_qty_wrapper.append(a_node_minus_sign);
+        div_node_qty_wrapper.append(a_node_plus_sign);
         div_node_qty_wrapper.append(a_node_delete_item);
         div_node_price_wrapper.append(span_node_price);
 
@@ -114,9 +150,13 @@ window.onload = function() {
         div_node_cart_item.append(div_node_qty_wrapper);
         div_node_cart_item.append(div_node_price_wrapper);
 
-        console.dir(div_node_cart_item);
         cartItemsWrapper.append(div_node_cart_item);
 
+        emptyCartMsg.style.display = "none";
     }
 
+    function removeItem(item){
+        var itemParent = item.parentElement.parentElement.parentElement;
+        itemParent.removeChild(item.parentElement.parentElement);
+    }
 }
