@@ -17,6 +17,7 @@ window.onload = function() {
             e.preventDefault();
             addItem(this);
             shoppingCart.style.display = "block";
+            this.setAttribute("disabled", true);
         });
     }
 
@@ -33,18 +34,6 @@ window.onload = function() {
             deleteItems[i].addEventListener("click", function(e){
                 e.preventDefault();
                 removeItem(this);
-            });
-        }
-
-        //Change quantity of item Toggle shopping cart
-        for (var i = 0; i < minusButton.length; i++) {
-            minusButton[i].addEventListener("click", function () {
-                var inputQty = this.parentElement.children[1].value;
-
-                this.parentElement.children[1].setAttribute("value", inputQty--);
-
-
-
             });
         }
     });
@@ -108,14 +97,14 @@ window.onload = function() {
         p_input_node_qty.setAttribute("value", "1");
 
         var a_node_plus_sign = document.createElement("a");
-        a_node_plus_sign.setAttribute("href", "#");
+        a_node_plus_sign.setAttribute("onclick", "increment(this);");
         a_node_plus_sign.className = "plus-minus-signs plusButton";
 
         var i_node_plus_icon = document.createElement("i");
         i_node_plus_icon.className = "fa fa-plus-circle fa-lg";
 
         var a_node_minus_sign = document.createElement("a");
-        a_node_minus_sign.setAttribute("href", "#");
+        a_node_minus_sign.setAttribute("onclick", "decrement(this);");
         a_node_minus_sign.className = "plus-minus-signs minusButton";
 
         var i_node_minus_icon = document.createElement("i");
@@ -155,8 +144,32 @@ window.onload = function() {
         emptyCartMsg.style.display = "none";
     }
 
-    function removeItem(item){
-        var itemParent = item.parentElement.parentElement.parentElement;
-        itemParent.removeChild(item.parentElement.parentElement);
+
+}
+
+function removeItem(item){
+    var itemParent = item.parentElement.parentElement.parentElement;
+    itemParent.removeChild(item.parentElement.parentElement);
+}
+
+// Increment input quantity
+function decrement(item){
+    var value = item.parentElement.children[1].value;
+
+    if (value > 1){
+        value--;
+        item.parentElement.children[1].value = value;
     }
+    else {
+        removeItem(item);
+    }
+}
+
+// Increment input quantity
+function increment(item){
+    var value = item.parentElement.children[1].value;
+
+    value++;
+    item.parentElement.children[1].value = value;
+
 }
