@@ -29,6 +29,12 @@ a{
     text-decoration: none;
 }
 
+header {
+    position: fixed;
+    z-index: 4;
+    border-bottom: 1px solid #eee;
+}
+
 .align-center {
     text-align: center;
 }

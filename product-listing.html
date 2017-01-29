@@ -33,14 +33,14 @@
         </ul>
         <ul id="cart-login-wrapper"  class="align-center uppercase">
             <li id="cart-header-button" class="left cart-icon-items">
-                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="cart-number-items">3</span>
+                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="cart-number-items" id="cart-qty-items"></span>
             </li>
             <li class="cart-icon-items">
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
             </li>
         </ul>
     </header>
-
+    <div class="overlay"></div>
     <div id="cart">
         <div id="inter-img-wrapper">
             <div id="inter-img">
@@ -65,8 +65,8 @@
 
                     <div class="info-purchase">
                         <span>Do you have a promo code ?</span>
-                        <input type="text" placeholder="Insert your code here" class="promo-input">
-                        <span class="btn btn-pink">GO</span>
+                        <input type="text" placeholder="Insert your code here" id="promo-code" class="promo-input">
+                        <span class="btn btn-pink"  onclick="applyPromoCode()">GO</span>
                     </div>
 
                <!--     <div class="keep-shopping">

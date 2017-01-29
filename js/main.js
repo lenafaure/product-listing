@@ -4,22 +4,54 @@ var hideShoppingCart = document.getElementById("hide-shopping-cart");
 var headerCartButton = document.getElementById("cart-header-button");
 var cartItemsWrapper = document.querySelector(".cart-items-wrapper");
 var emptyCartMsg = document.getElementById("empty-cart");
-
-var plusButton = document.querySelectorAll(".plusButton");
+var overlay = document.querySelector(".overlay");
 
 // Object containing selected items
 var cartItems = {
     "selectedItems": [],
-    "total_price": 0
+    "totalPrice": null
 }
+
+var promoCodes = {
+    applied: false,
+    TOPSSALE: {
+        code: "TOPSSALE",
+        value: 15,
+        description: "15% off for Skirts",
+        appliesTo: {
+            items: ["Lancaster", "Liverpool"],
+            allProducts: false
+        },
+        applied: false
+    },
+    WEDDINGSALE: {
+        code: "WEDDINGSALE",
+        value: 10,
+        description: "10% off for a specific product",
+        appliesTo: {
+            items: ["Strasbourg"],
+            allProducts: false
+        },
+       applied: false
+    },
+    BIGSALE: {
+        code: "BIGSALE",
+        value: 5,
+        description: "5% off on total value",
+        appliesTo: {
+            items: [],
+            allProducts: true
+        },
+        applied: false
+    }
+}
+
 
 // Add item on click on "Add to Cart" button
 for (var i = 0; i < addToCart.length; i++){
     addToCart[i].addEventListener("click", function(e){
         e.preventDefault();
         addItem(this);
-        shoppingCart.style.display = "block";
-        /*this.setAttribute("disabled", true);*/
     });
 }
 
@@ -43,14 +75,18 @@ document.addEventListener("click", function() {
 // Hide shopping cart
 hideShoppingCart.addEventListener("click", function(){
     shoppingCart.style.display = "none";
+    overlay.style.display = "none";
 });
 
 // Toggle shopping cart
 headerCartButton.addEventListener("click", function(){
     if(shoppingCart.style.display == "block") {
         shoppingCart.style.display = "none";
+        overlay.style.display = "none";
     } else {
         shoppingCart.style.display = "block";
+        window.scrollTo(0, 0);
+        overlay.style.display = "block";
     }
 });
 
@@ -148,17 +184,20 @@ function addItem(item) {
         cartItems.selectedItems.push({
             "itemName": itemName,
             "itemPrice": parseInt(itemPrice),
+            "itemPricePromo": null,
             "itemImage": itemImage,
             "itemDescription": itemDescription,
             "itemQty": 1,
             "itemTotalPrice": parseInt(itemPrice),
+            "promoCodesApplied": []
         })
     } else {
         var itemInCart = find(itemName);
         for(var i = 0; i < cartItems.selectedItems.length; i++){
             if(cartItems.selectedItems[i].itemName == itemName){
                 cartItems.selectedItems[i].itemQty += 1;
-                cartItems.selectedItems[i].itemTotalPrice = cartItems.selectedItems[i].itemPrice * cartItems.selectedItems[i].itemQty;
+
+
                 itemInCart.children[2].children[1].value++;
             }
         }
@@ -170,16 +209,38 @@ function addItem(item) {
     emptyCartMsg.style.display = "none";
 }
 
+function calculateTotalPrice() {
+    var totalPrice = 0;
+
+    for(var i = 0; i < cartItems.selectedItems.length; i++){
+        if(cartItems.selectedItems[i].itemPricePromo != null) {
+            console.log("ok");
+            cartItems.selectedItems[i].itemTotalPrice = cartItems.selectedItems[i].itemPricePromo * cartItems.selectedItems[i].itemQty;
+        }
+        else {
+            cartItems.selectedItems[i].itemTotalPrice = cartItems.selectedItems[i].itemPrice * cartItems.selectedItems[i].itemQty;
+        }
+
+        totalPrice = totalPrice + cartItems.selectedItems[i].itemTotalPrice;
+        cartItems.totalPrice = Math.round(totalPrice);
+    }
+}
+
 function removeItem(item){
     var itemParent = item.parentElement.parentElement.parentElement;
-    itemParent.removeChild(item.parentElement.parentElement);
+
+    if(itemParent) {
+        itemParent.removeChild(item.parentElement.parentElement);
+    }
     var itemName =  item.parentElement.parentElement.children[1].children[0].innerHTML;
 
     for(var i = 0; i < cartItems.selectedItems.length; i++){
         if(cartItems.selectedItems[i].itemName == itemName){
-            cartItems.selectedItems.splice(i);
+            cartItems.selectedItems.splice(i, 1);
         }
     }
+
+    updateTotalPrice(cartItems);
 }
 
 // Decrement input quantity
@@ -249,15 +310,21 @@ function find(itemName){
 }
 
 function updateTotalPrice(cartItems){
+
+    calculateTotalPrice();
+
+    displayTotalPrice();
+    console.log(cartItems.totalPrice);
+    console.log(cartItems);
+
+}
+
+function displayTotalPrice() {
     var totalPriceDisplay = document.getElementById("total-price");
     var grandTotalDisplay = document.getElementById("grand-total");
     var shippingFeeDisplay = document.getElementById("shipping-fee");
-    var totalPrice = 0;
+    var totalPrice = cartItems.totalPrice;
     var shippingFee = 12;
-
-    for(var i = 0; i < cartItems.selectedItems.length; i++){
-        totalPrice = totalPrice + cartItems.selectedItems[i].itemTotalPrice;
-    }
 
     totalPriceDisplay.innerHTML = totalPrice;
 
@@ -269,5 +336,69 @@ function updateTotalPrice(cartItems){
         shippingFeeDisplay.className = "";
     }
 
-    return totalPrice;
+    updateQuantity(cartItems);
 }
+
+
+function updateQuantity(cartItems){
+    var cartQtyDisplay = document.getElementById("cart-qty-items");
+    var totalQty = 0;
+
+    for(var i = 0; i < cartItems.selectedItems.length; i++){
+        totalQty = totalQty + cartItems.selectedItems[i].itemQty;
+    }
+
+    cartQtyDisplay.innerHTML = totalQty;
+}
+
+function applyPromoCode(){
+    var promoCode = document.getElementById("promo-code").value;
+    var itemsInPromo = promoCodes[promoCode].appliesTo.items;
+
+    if(promoCodes.applied == false) {
+        for(var i = 0; i < cartItems.selectedItems.length; i++){
+            if(itemsInPromo.indexOf(cartItems.selectedItems[i].itemName) !== -1) {
+                cartItems.selectedItems[i].promoCodesApplied.push(promoCode);
+            }
+        }
+    }
+
+    updatePromoPrice(promoCode);
+}
+
+function updatePromoPrice(promoCode){
+
+    if(promoCodes[promoCode].applied == false){
+        for( var i = 0; i < cartItems.selectedItems.length; i++ ){
+            if(promoCodes[promoCode].appliesTo.allProducts === true) {
+
+                if( cartItems.selectedItems[i].itemPricePromo != null) {
+                    cartItems.selectedItems[i].itemPricePromo = cartItems.selectedItems[i].itemPricePromo - (cartItems.selectedItems[i].itemPricePromo * (promoCodes[promoCode].value / 100));
+                }
+                else {
+                    cartItems.selectedItems[i].itemPricePromo = cartItems.selectedItems[i].itemPrice - (cartItems.selectedItems[i].itemPrice * (promoCodes[promoCode].value / 100));
+                }
+
+                cartItems.selectedItems[i].itemTotalPrice = cartItems.selectedItems[i].itemPricePromo * cartItems.selectedItems[i].itemQty;
+                promoCodes[promoCode].applied = true;
+            }
+            else if((cartItems.selectedItems[i].promoCodesApplied.indexOf(promoCode) !== -1)
+                && promoCodes[promoCode].appliesTo.allProducts == false) {
+
+                if( cartItems.selectedItems[i].itemPricePromo != null) {
+                    cartItems.selectedItems[i].itemPricePromo = cartItems.selectedItems[i].itemPricePromo - (cartItems.selectedItems[i].itemPricePromo * (promoCodes[promoCode].value / 100));
+                }
+                else {
+                    cartItems.selectedItems[i].itemPricePromo = cartItems.selectedItems[i].itemPrice - (cartItems.selectedItems[i].itemPrice * (promoCodes[promoCode].value / 100));
+                }
+
+                cartItems.selectedItems[i].itemTotalPrice = cartItems.selectedItems[i].itemPricePromo * cartItems.selectedItems[i].itemQty;
+                promoCodes[promoCode].applied = true;
+            }
+        }
+
+    }
+
+    updateTotalPrice(cartItems);
+}
+
