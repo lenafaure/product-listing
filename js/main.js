@@ -1,7 +1,8 @@
-/* Thought I would have the time to refactor, comment and rework on everything, 
+/* I thought I would have the time to refactor, comment and rework on everything,
 I am definitely not proud of this...
 If you had some guidelines on how to architect a project like this one from the 
 beginning it would be great.
+I will continue to work on it
 */
 
 (function() {
